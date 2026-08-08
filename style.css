@@ -1,75 +1,392 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #080a0f;
+    --card: #10131a;
+    --card-light: #151923;
+    --border: #252a36;
+    --accent: #5865f2;
+    --accent-light: #7280ff;
+    --text: #f5f7ff;
+    --text-secondary: #aeb4c2;
+    --danger: #ed4245;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #0f1117;
-    color: #e6e6e6;
     min-height: 100vh;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 50% -20%,
+            rgba(88, 101, 242, 0.18),
+            transparent 45%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(88, 101, 242, 0.07),
+            transparent 35%
+        ),
+        var(--background);
+
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
+
+    padding: 50px 20px;
 }
 
-body > * {
-    max-width: 850px;
+/* Main Card */
+
+.tos-container {
     width: 100%;
+    max-width: 900px;
+
+    background: rgba(16, 19, 26, 0.96);
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 80px rgba(88, 101, 242, 0.05);
+
+    backdrop-filter: blur(12px);
+
+    animation: fadeIn 0.5s ease-out;
 }
+
+/* Header */
 
 h1 {
-    background: #171a23;
-    color: #ffffff;
-    font-size: 32px;
+    position: relative;
+
+    padding: 35px 30px;
+
     text-align: center;
-    padding: 25px;
-    border-radius: 12px 12px 0 0;
-    border-bottom: 3px solid #5865f2;
-    letter-spacing: 0.5px;
+
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #171b26,
+            #10131a
+        );
+
+    border-bottom: 1px solid var(--border);
 }
 
-p {
-    display: block;
-    background: #171a23;
-    padding: 30px 40px;
-    border-radius: 0 0 12px 12px;
-    line-height: 1.7;
+/* Accent line under header */
+
+h1::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -1px;
+    left: 50%;
+
+    width: 120px;
+    height: 3px;
+
+    transform: translateX(-50%);
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--accent),
+        transparent
+    );
+
+    box-shadow:
+        0 0 15px rgba(88, 101, 242, 0.7);
+}
+
+/* Content */
+
+.tos-content {
+    padding: 40px 50px;
+}
+
+/* Intro */
+
+.intro {
+    margin-bottom: 25px;
+
+    color: var(--text-secondary);
+
     font-size: 16px;
+    line-height: 1.7;
 }
 
-p:first-line {
-    font-size: 20px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-b {
-    color: #ffffff;
-}
+/* Lists */
 
 ul {
-    margin: 15px 0 20px 25px;
+    list-style: none;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-bottom: 38px;
 }
 
 li {
-    margin-bottom: 8px;
+    position: relative;
+
+    padding: 15px 18px 15px 48px;
+
+    background: var(--card-light);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    color: var(--text-secondary);
+
+    line-height: 1.5;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
 }
 
-@media (max-width: 600px) {
+/* Bullet */
+
+li::before {
+    content: "✓";
+
+    position: absolute;
+
+    left: 17px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(88, 101, 242, 0.12);
+
+    color: var(--accent-light);
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* List Hover */
+
+li:hover {
+    transform: translateX(4px);
+
+    background: #181c27;
+
+    border-color: rgba(88, 101, 242, 0.45);
+}
+
+/* Bold text */
+
+b {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Section Headers */
+
+h2 {
+    position: relative;
+
+    margin-bottom: 20px;
+
+    padding-bottom: 12px;
+
+    color: #ffffff;
+
+    font-size: 21px;
+    font-weight: 650;
+}
+
+h2::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 45px;
+    height: 2px;
+
+    background: var(--accent);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 10px rgba(88, 101, 242, 0.6);
+}
+
+/* Violation List */
+
+h2 + ul li::before {
+    content: "!";
+
+    background: rgba(237, 66, 69, 0.12);
+
+    color: #ff6b6e;
+}
+
+/* Thank You */
+
+.thank-you {
+    position: relative;
+
+    margin-top: 35px;
+
+    padding: 20px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(88, 101, 242, 0.12),
+            rgba(88, 101, 242, 0.03)
+        );
+
+    border: 1px solid rgba(88, 101, 242, 0.2);
+
+    border-radius: 10px;
+
+    color: #dfe2ff;
+
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+.thank-you::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: var(--accent);
+
+    border-radius: 10px 0 0 10px;
+
+    box-shadow:
+        0 0 15px rgba(88, 101, 242, 0.5);
+}
+
+/* Links if you add any */
+
+a {
+    color: var(--accent-light);
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #9aa3ff;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #292e3b;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3b4150;
+}
+
+/* Animation */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
     body {
         padding: 20px 10px;
     }
 
-    h1 {
-        font-size: 25px;
-        padding: 20px;
+    .tos-container {
+        border-radius: 14px;
     }
 
-    p {
-        padding: 25px 20px;
+    h1 {
+        padding: 28px 18px;
+
+        font-size: 25px;
+    }
+
+    .tos-content {
+        padding: 28px 20px;
+    }
+
+    li {
+        padding: 14px 15px 14px 45px;
+
+        font-size: 14px;
+    }
+
+    .intro {
         font-size: 15px;
+    }
+
+    h2 {
+        font-size: 19px;
     }
 }
